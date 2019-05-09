@@ -14,7 +14,7 @@ func init() {
 	flag.StringVar(&token, "t", "", "Bot token")
 	flag.StringVar(&dir, "d", "output", "Output dir for emotes")
 	flag.StringVar(&port, "p", "", "Port that server sharing emotes is on")
-	flag.DurationVar(&sleepTime, "s", time.Minute, "Time bot sleeps before checking emotes again")
+	flag.DurationVar(&sleepTime, "s", time.Minute*10, "Time bot sleeps before checking emotes again")
 	flag.Parse()
 }
 
@@ -48,7 +48,7 @@ func main() {
 	go runBot()
 
 	// If no port provided, then do not start http server
-	if port == "" {
+	if port != "" {
 		go serveEmojiFolder()
 	}
 
